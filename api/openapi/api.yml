@@ -31,9 +31,13 @@ paths:
                         {
                           "id": "current-time",
                           "parameterDescription": "Compute variables relevant to this timestamp.",
-                          "parameterValue": { "value": "2019-09-20T00:00:01Z" },
-                          "legalValues": { "type": "string", "format": "time-stamp" }
-                        }
+                          "parameterValue": 
+                            { 
+                              "value": "2019-09-20T00:00:01Z",
+                              "type": "string", 
+                              "format": "time-stamp" 
+                            }
+                          }
                       ],
                       "objectVariables": [
                         {
@@ -220,17 +224,16 @@ components:
           example:
             - id: taxid.NCBI
               title: Taxonomy Id
-              legalValues:
-                type: string
-                enum:
-                  - value: '9606'
-                    title: Human
-                  - value: '10090'
-                    title: Mouse
-                  - value: '10116'
-                    title: Rat
-                  - value: '10029'
-                    title: Chinese hamster
+              type: string
+              enum:
+                - value: '9606'
+                  title: Human
+                - value: '10090'
+                  title: Mouse
+                - value: '10116'
+                  title: Rat
+                - value: '10029'
+                  title: Chinese hamster
               selectorValue:
                 value: '9606'
                 title: Human
@@ -246,13 +249,11 @@ components:
               title: Thresholding Approach
               parameterDescription: >-
                 Select one of two thresholding methods, either global (the threshold is the same for all the genes) or local (the threshold is gene specific). See https://github.com/LewisLabUCSD/CellFie/wiki/Threshold-definition for more details.
-              legalValues:
-                type: string
-                enum:
-                  - global
-                  - local
-              parameterValue:
-                value: global
+              type: string
+              enum:
+                - global
+                - local
+              value: "global"
         objectVariables:
           type: array
           items:
@@ -267,9 +268,8 @@ components:
                 units: years
               why: >-
                 Age is used for comparing objects
-              legalValues:
-                type: number
-                minimum: '0'
+              type: number
+              minimum: '0'
         timestamp:
           description: 'If absent, defaults to current time. Can be overridden by objectVariables timestamp value on a variable-by-variable basis.'
           type: string
@@ -294,31 +294,8 @@ components:
             taxid.NCBI, but not always, e.g., FUSE:iHSA is a selector 
             for choosing analysis using the iHSA model on human organisms.
           example: taxid.NCBI
-        legalValues:
-          type: object
-          description: >-
-            If absent, all values are legal, so treat the value like a string.
-            Use the JSON schema,
-            https://json-schema.org/draft/2019-09/json-schema-validation.html.
-            For example, { type: 'string', 'enum': [ '9606', '10090' ]
-            } to define an enumeration,  { 'type': 'number' } for a float, and {
-            'type': 'number', 'minimum': '0' } for a positive number, and {
-            'type': 'integer' } for an integer. Furthermore, a non-standard
-            'title' can be added in support of a human-readable string for the
-            type's value. This maybe be implemented by FUSE to aid in
-            debugging, however clients should not depend on this value. NOTE:
-            This value is actually an object type, but we use 'string' here to
-            overcome a shortcoming of the swagger ui. This design choice was
-            made in order to prioritize a better interactive documentation
-            experience for the API user.
-          example:
-            type: string
-            enum:
-              - value: '9606'
-                title: Human
-              - value: '10090'
         selectorValue:
-          type: string
+          type: object
           description: >-
             The title in the example is optional. NOTE: This value is actually an object type, but we use
             'string' here to overcome a shortcoming of the swagger ui. This
@@ -327,6 +304,11 @@ components:
           example:
             value: '9606'
             title: Human
+            type: string
+            enum:
+              - value: '9606'
+                title: Human
+              - value: '10090'
         title:
           type: string
           example: NCBI organismal taxonomy id
@@ -374,26 +356,9 @@ components:
             This design choice was made in order to prioritize a better
             interactive documentation experience for the API user.
           example:
-            value: specific
-        legalValues:
-          type: object
-          description: >-
-            If absent, all values are legal, so treat the value like a string.
-            Use the JSON schema,
-            https://json-schema.org/draft/2019-09/json-schema-validation.html.
-            For example, { type: 'string', 'enum': [ 'all', 'intersection' ]
-            } to define an enumeration,  { 'type': 'number' } for a float, and {
-            'type': 'number', 'minimum': '0' } for a positive number, and {
-            'type': 'integer' } for an integer. NOTE: This value is actually an
-            object type, but we use 'string' here to overcome a shortcoming of
-            the swagger ui. This design choice was made in order to prioritize a
-            better interactive documentation experience for the API user. 
-          example:
+            value: "2019-09-20T00:00:01Z"
             type: string
-            enum:
-              - value: 'all'
-                title: 'intersection'
-              - value: 'specific'
+            format: time-stamp
     ObjectVariable:
       description: >-
         Used to specify object values sourced from the digital object server, as well as user-supplied overrides of
@@ -448,20 +413,17 @@ components:
           example: Age
         variableValue:
           description: >-
-            The type for the variableValue is defined by the legalValues, and thus is
-            the client informed on how to render the variableValue. The
-            variableValue may also include the 'units' field, which is optional,
+            The variableValue may include the 'units' field, which is optional,
             and if left off, implies the system default units. It's up to the
             analysis plugin to make unit conversions as needed by the analysis
             model, just as it is up to the dashboard to make unit conversions as
-            needed by the end user. NOTE: The 'variableValue' is actually an object 
-            type, but we use 'string' here to overcome a shortcoming of the swagger 
-            ui. This design choice was made in order to prioritize a better 
-            interactive documentation experience for the API user.
+            needed by the end user.
           type: object
           example:
-            value: '0.5'
+            value: 0.5
             units: years
+            type: number
+            default: 18
         why:
           type: string
           description: >-
@@ -472,19 +434,6 @@ components:
             was computed.
           example: >-
             Age is used to compare objects.
-        legalValues:
-          type: object
-          description: >-
-            If absent, all values are legal, so treat the value like a string.
-            Use the JSON schema,
-            https://json-schema.org/draft/2019-09/json-schema-validation.html.
-            For example, { type: 'string', 'enum': [  'all', 'intersection'  ]
-            } to define an enumeration,  { 'type': 'number' } for a float, and {
-            'type': 'number', 'minimum': '0' } for a positive number, and {
-            'type': 'integer' } for an integer.
-          example:
-            type: number
-            minimum: '0'
         group:
             type: string
             description: >-
