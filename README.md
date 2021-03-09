@@ -36,31 +36,31 @@ Note, an applianece must specify a pluginType, so for the purpose of this demons
 ```
 git clone --recursive http://github.com/RENCI/<your-repo-name>
 ```
-* Make sure the following passes 1 test: ./tests/test.sh
+* Make sure the following passes exactly 1 test: `./tests/test.sh`
 * Edit this README.md file and replace all occurrences of `fuse-appliance-template` with your repo's name
 * Update the source files appropriately:
- - [ ] config.json: describe your appliances pluginType ["s":"Server", "m":"Mapper", "a":"Analysis"], required parameters, supported selector values, and supported/required objectVariables
- - [ ] docker-compose.yml: replace `fuse-appliance-template` with your repo's name and customize accordingly
- - [ ] requirements.txt: add your *version-locked* library requirements to the list
- - [ ] sample.env: add any required environmental variables, don't forget to also document them in this readme
- - [ ] api/openapi.yml: 
+ - [ ] **config.json**: describe your appliances pluginType ["s":"Server", "m":"Mapper", "a":"Analysis"], required parameters, supported selector values, and supported/required objectVariables
+ - [ ] **docker-compose.yml**: replace `fuse-appliance-template` with your repo's name and customize accordingly
+ - [ ] **requirements.txt**: add your *version-locked* library requirements to the list
+ - [ ] **sample.env**: add any required environmental variables, don't forget to also document them in this readme
+ - [ ] **api/openapi.yml**: 
    - [ ]  Search for all occurrences of `fuse-appliance-template` and replace
    - [ ] Define and add endpoints for your appliance
    - [ ] Define the openApi for your appliance, adding an `operationId:` for each endpoint using pattern `api.get_<endpoint>`
- - [ ] api/__init__.py: Add one "get_" function for each operationId in the ./openapi/api.yml file
- - [ ] ...optionally... create an api/routes.py file and map to each of the endpoints handled by __init__.py for readability(?)
- - [ ] ...optionally... create an api/src/app.py file that can be included into a python library to support non-openapi access to the appliance's logic (to run the application logic in a more performant, imported library instead of as a stand-alone appliance)
- - [ ] tests/test_func.py: add tests for your endpoints
- - [ ] tests/docker-compose.yml: replace fuse-appliance-template with your repo name
- - [ ] tests/test.sh: same as above
+ - [ ] **api/__init__.py**: Add one "get_" function for each operationId in the ./openapi/api.yml file
+ - [ ] ...optionally... create **api/routes.py**: map a 'route' function to each of the endpoints handled by __init__.py for readability(?)
+ - [ ] ...optionally... create **api/src/app.py**: that can be included into a python library to support non-openapi access to the appliance's logic (to run the application logic in a more performant, imported library instead of as a stand-alone appliance)
+ - [ ] **tests/test_func.py**: add tests for your endpoints
+ - [ ] **tests/docker-compose.yml**: replace fuse-appliance-template with your repo name
+ - [ ] **tests/test.sh**: same as above
  - [ ] add any tools you need to share across appliances to `tx-utils`
- - [ ] make sure the following passes all tests: ./tests/test.sh
- - [ ] contact the dockerhub/txscience organization administrator to add a dockerhub repo for your container
+ - [ ] make sure the following passes all tests: `./tests/test.sh`
+ - [ ] contact the dockerhub/txscience organization administrator (email:txscience@lists.renci.org) to add a dockerhub repo for your container
 * remove this section from the README.md
 * checkin your mods: 
 ```
 git status # make sure everything looks OK
-git commit -a -m 'Initial customization' .
+git commit -a -m 'Initial customization'
 git push
 ```
 
