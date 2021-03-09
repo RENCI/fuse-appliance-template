@@ -88,7 +88,7 @@ paths:
                       "level": 1,
                       "action": "Changed plugin from [g] type to 's'[fuse-appliance-template] and returning config as-is otherwise"
                       } ]
-                  configs:
+                  config:
                     $ref: '#/components/schemas/Config'
 components:
   schemas:

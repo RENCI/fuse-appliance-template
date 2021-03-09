@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   
-  fuse-appliance-template-template:
+  fuse-appliance-template-template-test:
     build:
       context: .
       dockerfile: tests/Dockerfile
