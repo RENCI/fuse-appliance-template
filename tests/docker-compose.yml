@@ -1,13 +1,13 @@
 version: '3.8'
 services:
   
-  fuse-mapper-immunespace-test:
+  fuse-appliance-template-template:
     build:
       context: .
       dockerfile: tests/Dockerfile
     command: ["-s", "-vv", "-x"] 
     depends_on:
-      - fuse-mapper-immunespace
+      - fuse-appliance-template
 
 
 

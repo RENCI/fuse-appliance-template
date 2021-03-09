@@ -1,15 +1,8 @@
 version: '3.8'
 services:
-  
-  fuse-mapper-immunespace:
+
+  fuse-appliance-template:
     build:
       context: .
-    restart: always
-    environment:
-      INPUT_DIR: /shared
-      OUTPUT_DIR: /shared
-#      LOG_LEVEL: DEBUG
     ports:
       - $API_PORT:8080
-    volumes:
-      - ./config:/usr/src/app/config
