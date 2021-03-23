@@ -50,7 +50,9 @@ git clone --recursive http://github.com/RENCI/<your-repo-name>
  - [ ] **api/__init__.py**: Add one "get_" function for each operationId in the ./openapi/api.yml file
  - [ ] ...optionally... create **api/routes.py**: map a 'route' function to each of the endpoints handled by __init__.py for readability(?)
  - [ ] ...optionally... create **api/src/app.py**: that can be included into a python library to support non-openapi access to the appliance's logic (to run the application logic in a more performant, imported library instead of as a stand-alone appliance)
+ - [ ] ...optionally... create **fuse/<appliance-type>/<3rd-party-resource/dispatcher.py to field the endpoint requests, where <appliance-type> is one of "server", "mapper", or "analyzer" and <3rd-party-resource> is the name of the 3rd-party data source or tool to be integrated. The idea is that a non-RESTful client can choose to `import fuse.<appliance-type>.<3rd-party-resource>.dispatcher.` to use the logic behind the OpenAPI without using docker or HTTP.
  - [ ] **tests/test_func.py**: replace fuse-server-immunespace with your repo name and add tests for your endpoints
+ - [ ] **tests/expected**: add expected output for your tests here, being certain they aren't too large or they will break the dockerhub build. See fuse-server-immunespace/tests/test_lib.sh for an example of how to test for larger outputs.
  - [ ] **tests/docker-compose.yml**: replace fuse-appliance-template with your repo name
  - [ ] **tests/test.sh**: same as above
  - [ ] add any tools you need to share across appliances to `tx-utils`
