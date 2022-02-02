@@ -33,8 +33,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-client = docker.from_env()
-
 import pathlib
 import json
 @app.get("/config", summary="Returns the config for the appliance")

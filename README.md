@@ -36,7 +36,7 @@ Note, an appliance must specify a pluginType, so for the purpose of this demonst
 ```
 git clone --recursive http://github.com/RENCI/<your-repo-name>
 ```
-* Make sure the tests pass (coming soon)
+* Make sure the test passes (prove -v t/test.t)
 * Edit this README.md file and replace all occurrences of `fuse-appliance-template` with your repo's name
 * Update the source files appropriately:
  - [ ] **config.json**: describe your appliances pluginType ["p":"Provider", "m":"Mapper", "t":"Tool"], required parameters, and supported/required objectVariables
@@ -46,7 +46,7 @@ git clone --recursive http://github.com/RENCI/<your-repo-name>
  - [ ] **main.py**: 
    - [ ] Search for all occurrences of `fuse-appliance-template` and replace
    - [ ] Define and add endpoints for your appliance
- - [ ] **write and run tests - more guidance coming soon
+ - [ ] **write and run tests - look at t/test.t for examples
  - [ ] add any tools you need to share across appliances to `tx-utils`
  - [ ] contact the dockerhub/txscience organization administrator (email:txscience@lists.renci.org) to add a dockerhub repo for your container
 * remove this section from the README.md

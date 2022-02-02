@@ -9,11 +9,8 @@
 # To install:
 #   
 #   cpan App::cpanminus
-#   # restart shell
-#   cpanm Test::File
-#   cpanm Test::File::Contents
-#   cpanm Cpanel::JSON::XS
-#   cpanm Switch
+#   # restart shell, then get the dependencies:
+#   cpanm --installdeps .
 # For more details:
 #   http://www.cpan.org/modules/INSTALL.html
 
@@ -32,8 +29,11 @@ use Support;
 our $verbose = 0;
 our $dry_run = 0;
 
-our $HOST_PORT = 8082;
-our $HOST_NAME = "http://localhost:${HOST_PORT}";
+# read the .env file
+use Dotenv;      
+Dotenv->load;
+
+our $HOST_PATH = "http://localhost:$ENV{'API_PORT'}"; #8082;
 
 
 GetOptions('dry_run' => \$dry_run,
@@ -41,6 +41,7 @@ GetOptions('dry_run' => \$dry_run,
 if($verbose){
     print("+ dry_run: $dry_run\n");
     print("+ verbose: $verbose\n");
+    print("+ API_PORT: $ENV{'API_PORT'}\n");
 }
 
 my $fn ;

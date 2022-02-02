@@ -3,7 +3,7 @@ package Support;
 
 require Exporter;
 @ISA = qw(Exporter);
-our @EXPORT = qw($verbose $no_download $dry_run $HOST_NAME $HOST_PORT $EMAIL $GROUPID $APIKEY $dl_taskid $analysis_taskid 
+our @EXPORT = qw($verbose $no_download $dry_run $HOST_PATH $EMAIL $GROUPID $APIKEY $dl_taskid $analysis_taskid 
 		 cleanup_out f cmd generalize_output rawf dl_poll json_struct);
 
 use Cpanel::JSON::XS;
@@ -31,9 +31,9 @@ sub cmd {
     
     my $cmd;
     switch($type) {
-    	case "DELETE" { $cmd=sprintf("curl -X 'DELETE' '${HOST_NAME}/%s' -H 'accept: application/json'", $endpoint); }
-	case "GET"    { $cmd=sprintf("curl -X 'GET'    '${HOST_NAME}/%s' -H 'accept: application/json'", $endpoint); }
-	case "POST"   { $cmd=sprintf("curl -X 'POST'   '${HOST_NAME}/%s' -H 'accept: application/json' -d '%s'", $endpoint, $post_args);}
+    	case "DELETE" { $cmd=sprintf("curl -X 'DELETE' '${HOST_PATH}/%s' -H 'accept: application/json'", $endpoint); }
+	case "GET"    { $cmd=sprintf("curl -X 'GET'    '${HOST_PATH}/%s' -H 'accept: application/json'", $endpoint); }
+	case "POST"   { $cmd=sprintf("curl -X 'POST'   '${HOST_PATH}/%s' -H 'accept: application/json' -d '%s'", $endpoint, $post_args);}
 	else { print("+! [cmd] ERROR ${type} not recognized.\n");	}
     }
 
