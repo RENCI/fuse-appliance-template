@@ -1,20 +1,41 @@
 {
-    "pluginDependencies": ["fuse-appliance-template"],
-    "title": "Generic appliance",
-    "pluginType": "s",
-    "pluginTypeTitle": "Server",
-    "pluginSelectors": [],
+  "title": "Generic server type appliance",
+  "piid": "fuse-appliance-template",
+    "pluginDependencies": [],
+    "pluginType": "p",
+    "pluginTypeTitle": "Provider",
     "settingsDefaults": {
-        "pluginSelectors": [],
-        "pluginParameters": [],
-        "objectVariables": [
-            {
-                "id": "FUSE:exampleId",
-                "title": "Demo objectVariable",
-                "description": "This is not a real object variable and is only for demonstration purposes. Replace this with variables your appliance supports for the digital objects in your system.",
-                "type": "string",
-                "default": "example default value"
-            }
-        ]
+      "pluginParameters": [
+	{
+          "id": "FUSE:baseURL",
+          "title": "Base URL",
+          "description": "The URL, minus the protocol.",
+          "value": "www.immunespace.org",
+          "type": "string"
+	},
+	{
+          "id": "FUSE:Test",
+          "title": "Test mode",
+          "description": "Don't actually download or cause any side-effects.",
+          "value": "FALSE",
+          "type": "string"
+	}
+      ],
+      "objectVariables": [
+	{
+          "id": "FUSE:APIKey",
+          "title": "API Key",
+          "description": "User's API Key for this server (xxx maybe provide instructions for retrieving the API key)",
+          "value": "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+          "type": "string"
+	},
+	{
+          "id": "FUSE:foreignDatasetID",
+          "title": "Foreign dataset ID",
+          "description": "A unique label that the remote host uses to identify the requested dataset.",
+          "value": "SDY61-9",
+          "type": "string"
+	}
+      ]
     }
 }
