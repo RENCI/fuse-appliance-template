@@ -7,8 +7,8 @@ Clone this repo to create a new FUSE-style appliance.
 FUSE stands for "[FAIR](https://www.go-fair.org/)", Usable, Sustainable, and Extensible.
 
 FUSE appliances can be run as a stand-alone appliance (see `up.sh` below) or as a plugin to a FUSE deployment (e.g., [fuse-immcellfie](http://github.com/RENCI/fuse-immcellfie)). FUSE appliances come in 3 flavors:
-* server: provides a common data access protocol to a digital object server
-* mapper: maps the data from a particular server type into a common data model with consistent syntax and semantics
+* provider: provides a common data access protocol to a digital object provider
+* mapper: maps the data from a particular data provider type into a common data model with consistent syntax and semantics
 * tool: analyzes data from a mapper, providing results and a specification that describes the data types and how to display them.
 
 ## prerequisites:
@@ -16,8 +16,8 @@ FUSE appliances can be run as a stand-alone appliance (see `up.sh` below) or as 
 * Docker 20.10 or higher
 * docker-compose v1.28 a
 * perl 5.16.3 or higher (for testing the install)
-# cpan
-# jq
+* cpan
+* jq
 
 Tips for updating docker-compose on Centos:
 
@@ -32,7 +32,7 @@ sudo chmod 755 $DESTINATION
 
 ## use this template:
 
-Note, an appliance must specify a pluginType, so for the purpose of this demonstration we ues type 's' (for digital object 'Server')
+Note, an appliance must specify a pluginType, so for the purpose of this demonstration we use type 'p' (for digital object 'Provider')
 * To add a new repository to the RENCI organization, [click here](https://github.com/organizations/RENCI/repositories/new) and select this repo for the template, otherwise new repo will be added to your username.
 * Get your new repo using the 'recursive' tag (see below)
 ```
@@ -64,7 +64,7 @@ git push
 1. Get this repository:
 `git clone --recursive http://github.com/RENCI/fuse-appliance-template
 
-2. Copy `sample.env` to `.env` and edit to suit your server:
+2. Copy `sample.env` to `.env` and edit to suit your provider:
 * __API_PORT__ pick a unique port to avoid appliances colliding with each other
 
 ## start
