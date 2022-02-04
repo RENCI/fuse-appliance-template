@@ -74,6 +74,10 @@ git push
 
 ## validate installation
 
+Start container prior to validations:
+```
+./up.sh
+```
 Simple test from command line
 
 ```
