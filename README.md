@@ -14,8 +14,10 @@ FUSE appliances can be run as a stand-alone appliance (see `up.sh` below) or as 
 ## prerequisites:
 * python 3.8 or higher
 * Docker 20.10 or higher
-* docker-compose v1.28 and 3.8 in the yml
-* cargo 1.49.0 or higher (for installing dockerfile-plus)
+* docker-compose v1.28 a
+* perl 5.16.3 or higher (for testing the install)
+# cpan
+# jq
 
 Tips for updating docker-compose on Centos:
 
@@ -36,7 +38,7 @@ Note, an appliance must specify a pluginType, so for the purpose of this demonst
 ```
 git clone --recursive http://github.com/RENCI/<your-repo-name>
 ```
-* Make sure the test passes (prove -v t/test.t)
+* Make sure the test passes (`./up.sh; prove t/test.t` - check t/test.t on how to install the test harness dependencies)
 * Edit this README.md file and replace all occurrences of `fuse-appliance-template` with your repo's name
 * Update the source files appropriately:
  - [ ] **config.json**: describe your appliances pluginType ["p":"Provider", "m":"Mapper", "t":"Tool"], required parameters, and supported/required objectVariables
@@ -46,9 +48,9 @@ git clone --recursive http://github.com/RENCI/<your-repo-name>
  - [ ] **main.py**: 
    - [ ] Search for all occurrences of `fuse-appliance-template` and replace
    - [ ] Define and add endpoints for your appliance
+   - [ ] Create functions in ./lib to support you endpoints, with unit tests, adding the unit tests to github actions (examples coming soon!)
  - [ ] **write and run tests - look at t/test.t for examples
- - [ ] add any tools you need to share across appliances to `tx-utils`
- - [ ] contact the dockerhub/txscience organization administrator (email:txscience@lists.renci.org) to add a dockerhub repo for your container
+ - [ ] contact the dockerhub/txscience organization administrator (email:txscience@lists.renci.org) to add a dockerhub repo for your container, if needed
 * remove this section from the README.md
 * checkin your mods: 
 ```
@@ -63,7 +65,7 @@ git push
 `git clone --recursive http://github.com/RENCI/fuse-appliance-template
 
 2. Copy `sample.env` to `.env` and edit to suit your server:
-* __API_PORT__ pick a unique port to avoid the `up.sh` and 'test' commands from colliding with other installations on the same server
+* __API_PORT__ pick a unique port to avoid appliances colliding with each other
 
 ## start
 ```
@@ -71,13 +73,29 @@ git push
 ```
 
 ## validate installation
+
+Simple test from command line
+
 ```
-curl -X 'GET' 'http://localhost:8082/config' -H 'accept: application/json' |jq -r 2> /dev/null
+curl -X 'GET' 'http://localhost:${API_PORT}/config' -H 'accept: application/json' |jq -r 2> /dev/null
+```
+Install test dependencies:
+```
+cpan App::cpanminus
+# restart shell
+cpanm --installdeps .
+
+```
+Run tests:
+```
+prove
+```
+More specific, detailed test results:
+```
+prove -v t/test.t :: --verbose
 ```
 
 ## stop
 ```
 ./down.sh
 ```
-## regression testing
-For repo owners:

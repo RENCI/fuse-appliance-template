@@ -5,9 +5,7 @@
 #
 # Dependencies:
 #   jq
-#   perl
 # To install:
-#   
 #   cpan App::cpanminus
 #   # restart shell, then get the dependencies:
 #   cpanm --installdeps .
